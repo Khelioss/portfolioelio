@@ -72,6 +72,19 @@
       <input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="_next" value="grazie.html">
     </form>
+     <script>
+function inviaEmail() {
+  var nome = encodeURIComponent(document.getElementById('nome').value);
+  var email = encodeURIComponent(document.getElementById('email').value);
+  var messaggio = encodeURIComponent(document.getElementById('messaggio').value);
+
+  var mailto_link = "mailto:elioesonia@email.com"
+                    + "?subject=" + nome
+                    + "&body=Da: " + email + "%0D%0A%0D%0A" + messaggio;
+
+  window.location.href = mailto_link;
+}
+</script>
   </section>
 
 
@@ -97,5 +110,6 @@
   </footer>
 </body>
 </html>
+
 
 
