@@ -64,24 +64,32 @@
    <section id="contact" class="contact">
     <h2 style="color: yellow; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Contattami</h2>
     <p>Scrivimi per un preventivo gratuito o una consulenza.</p>
-    <form>
-      <input type="text" name="name" placeholder="Nome" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <textarea name="message" placeholder="Messaggio" rows="5" required></textarea>
-     <button type="button" onclick="inviaEmail()" class="btn">Invia Email</button>
-      <input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_next" value="grazie.html">
-    </form>
-     <script>
+   <form id="contact-form">
+  <input type="text" id="nome" name="name" placeholder="Nome" required>
+  <input type="email" id="email" name="email" placeholder="Email" required>
+  <textarea id="messaggio" name="message" placeholder="Messaggio" rows="5" required></textarea>
+  <button type="button" onclick="inviaEmail()" class="btn">Invia Email</button>
+</form>
+
+<script>
 function inviaEmail() {
-  var nome = encodeURIComponent(document.getElementById('nome').value);
-  var email = encodeURIComponent(document.getElementById('email').value);
-  var messaggio = encodeURIComponent(document.getElementById('messaggio').value);
+  // Prendere i valori e rimuovere spazi iniziali/finali
+  var nome = document.getElementById('nome').value.trim();
+  var email = document.getElementById('email').value.trim();
+  var messaggio = document.getElementById('messaggio').value.trim();
 
+  if (!nome || !email || !messaggio) {
+    alert("Compila tutti i campi prima di inviare.");
+    return;
+  }
+
+  // Creare il corpo dell'email con ritorni a capo e codifica URL sicura
+  var body = "Da: " + email + "\n\n" + messaggio;
   var mailto_link = "mailto:elioesonia@email.com"
-                    + "?subject=" + nome
-                    + "&body=Da: " + email + "%0D%0A%0D%0A" + messaggio;
+                    + "?subject=" + encodeURIComponent(nome)
+                    + "&body=" + encodeURIComponent(body);
 
+  // Aprire il client di posta
   window.location.href = mailto_link;
 }
 </script>
@@ -110,6 +118,7 @@ function inviaEmail() {
   </footer>
 </body>
 </html>
+
 
 
 
